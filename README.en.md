@@ -10,4 +10,6 @@ This repository contains an application built with **Google Apps Script** for an
 
 This project is an example of how technology can make special moments even more unforgettable. ✨  
 
+Google Sheet: [Proposal App Sheet](https://docs.google.com/spreadsheets/d/12rREY-QDYQRAbXtb-witc5uiRF5xVOON_Wygp2mmEyw/edit?usp=sharing)
+
 🚀 **Want to read this in Spanish?** [🇪🇸 Leer en español](README.md)  
