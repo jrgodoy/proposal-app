@@ -10,4 +10,6 @@ Este repositorio contiene una aplicación creada con **Google Apps Script** para
 
 Este proyecto es una muestra de cómo la tecnología puede hacer momentos especiales aún más inolvidables. ✨  
 
+Planilla de Google: [Proposal App Sheet](https://docs.google.com/spreadsheets/d/12rREY-QDYQRAbXtb-witc5uiRF5xVOON_Wygp2mmEyw/edit?usp=sharing)
+
 🚀 **¿Quieres ver la versión en inglés?** [Read this in English](README.en.md)  
