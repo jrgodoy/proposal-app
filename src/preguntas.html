@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nuestra Historia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?!= include('styles'); ?>
+  <style>
+    .option {
+      width: 100%;
+      max-width: 300px;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      text-align: center;
+      border-radius: 5px;
+      background-color: #fff;
+      border: 1px solid #52b788;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .input-answer {
+      width: 100%;
+      max-width: 300px;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      background-color: #fff;
+      border: 1px solid #52b788;
+    }
+
+    .input-answer:focus {
+      border: 1px solid #52b788;
+    }
+
+    .option:hover {
+      background-color: #52b788;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      #question-box {
+        padding: 30px;
+      }
+
+      .option {
+        font-size: 15px;
+        padding: 8px;
+      }
+    }
+  </style>
+  <script>
+    let preguntas = [];
+    let indicePregunta = 0;
+
+    function cargarPreguntas() {
+      google.script.run.withSuccessHandler(data => {
+        preguntas = data;
+        cargarPregunta();
+      }).obtenerPreguntas();
+    }
+
+    async function marcarFilaComoContestada(nroFila) {
+      await google.script.run.withSuccessHandler(data => {})
+        .marcarFilaComoContestada(nroFila+1);
+    }
+
+    async function actualizarPagina() {
+      await google.script.run
+        .withSuccessHandler((url) => {window.open(url,"_top")})
+        .obtenerURL();
+    }
+
+    async function actualizarEstado(estado) {
+      await google.script.run.withSuccessHandler(data => {actualizarPagina()})
+        .actualizarEstado(estado);
+    }
+
+    function cargarPregunta() {
+      const pregunta = preguntas[indicePregunta];
+      const questionBox = document.getElementById('question-box');
+      questionBox.innerHTML = `
+        <h2>${pregunta.pregunta}</h2>
+
+        ${pregunta.opciones ? pregunta.opciones.map((opcion, i) => 
+          `<div class="option" onclick="verificarRespuesta('${opcion}')">${opcion}</div>`)
+          .join('')
+          : ''
+        }
+        
+        ${!pregunta.opciones ?  
+          `<input id="input-answer" class="input-answer" placeholder="${pregunta.textoAyuda}"/>
+          <button onclick="verificarRespuestaIngresada()">Confirmar</button>`
+          : ''
+        }
+        <p class="message" id="message"></p>
+      `;
+    }
+
+    function verificarRespuestaIngresada() {
+      const respuesta = document.getElementById('input-answer').value;
+      verificarRespuesta(respuesta);
+    }
+
+    function verificarRespuesta(respuesta) {
+      const esCorrecta = preguntas[indicePregunta].respuestaCorrecta == respuesta;
+      const esUltimaPregunta = indicePregunta + 1 == preguntas.length
+      const message = document.getElementById('message');
+
+      if(esCorrecta || esUltimaPregunta) {
+        marcarFilaComoContestada(preguntas[indicePregunta].indice);
+        message.innerHTML = preguntas[indicePregunta].mensajeCorrecto
+        
+        if (esUltimaPregunta) {
+          actualizarEstado('Terminado');
+        } else {
+          indicePregunta++;
+          setTimeout(() => cargarPregunta(), 2000);
+        }
+      } else {
+        message.innerHTML = preguntas[indicePregunta].mensajeError
+        setTimeout(() => {message.innerHTML = "";}, 2000);
+      }
+    }
+
+    window.onload = cargarPreguntas;
+  </script>
+</head>
+<body>
+  <div id="question-box">
+    <p id="errorMessage"></p>
+  </div>
+</body>
+</html>

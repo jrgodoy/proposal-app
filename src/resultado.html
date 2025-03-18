@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nuestra Historia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?!= include('styles'); ?>
+  <style>
+    #result-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      border: 2px solid #40916c;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    canvas {
+      position: relative;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      width: 100%;
+      margin: 0;
+    }
+  </style>
+  <script>
+  </script>
+</head>
+<body>
+  <div id="result-box">
+    <h2>¡Felicidades! 🎉</h2>
+    <h3>Pasaste el juego y te ganaste pasar el resto de tu vida a mi lado 💍</h3>
+    <h3>🤵🏻👰🏻</h3>
+    <h3>Te amo ♥️</h3>
+  </div>
+  <canvas id="canvas"></canvas>
+  <?!= include('confetti'); ?>
+</body>
+</html>

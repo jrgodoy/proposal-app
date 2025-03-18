@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nuestra Historia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?!= include('styles'); ?>
+  <style>
+    @media (max-width: 600px) {
+      button {
+        font-size: 15px;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+  <script>
+    async function actualizarPagina() {
+      await google.script.run
+        .withSuccessHandler((url) => {window.open(url,"_top")})
+        .obtenerURL();
+    }
+    async function empezar() {
+      await google.script.run
+        .withSuccessHandler(() => {actualizarPagina()})
+        .actualizarEstado('Empezado');
+    }
+  </script>
+</head>
+<body>
+  <div id="question-box">
+    <h2>Feliz cumple mes 🎉</h2>
+    <h3>Como regalo te tengo un juego, para ver que tanto sabes sobre nuestra la relación y de paso hagamos unos retos.</h3>
+    <h4 style="margin-bottom: 0;">Las reglas son: 📝</h4>
+    <ul style="text-align: left; margin-top: 0.5rem;   list-style-type: none;">
+      <li>📵 No puedes escribirme hasta que termines el juego</li>
+      <li>📸 Tenes que sacarte fotos en cada lugar del reto</li>
+    </ul>
+    <h4 style="margin-bottom: 0;">Antes de darle empezar puede que la app te pida permisos para redirigir la página, podés aceptar nomas eso. ✅</h4>
+    <button onclick="empezar()">Empezar</button>
+  </div>
+</body>
+</html>
