@@ -12,4 +12,6 @@ Este proyecto es una muestra de cómo la tecnología puede hacer momentos especi
 
 Planilla de Google: [Proposal App Sheet](https://docs.google.com/spreadsheets/d/12rREY-QDYQRAbXtb-witc5uiRF5xVOON_Wygp2mmEyw/edit?usp=sharing)
 
+![App Demo](app-demo.gif)
+
 🚀 **¿Quieres ver la versión en inglés?** [Read this in English](README.en.md)  
